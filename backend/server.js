@@ -120,6 +120,8 @@ app.post('/api/webhooks/github', async (req, res) => {
   }
   // Always acknowledge receipt
   res.status(200).send('OK');
+});
+
 // ─── Serve Frontend in Production ───
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
