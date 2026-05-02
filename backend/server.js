@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
+import { fileURLToPath } from 'url';
+import path from 'path';
 import db, { getRuns, logRun, getBudget, setBudget } from './db.js';
 import { handlePRWebhook } from './github.js';
 
@@ -118,6 +120,14 @@ app.post('/api/webhooks/github', async (req, res) => {
   }
   // Always acknowledge receipt
   res.status(200).send('OK');
+// ─── Serve Frontend in Production ───
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, '../dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 // ─── Start Server ───

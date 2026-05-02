@@ -8,6 +8,7 @@
     "server": "node backend/server.js",
     "dev:all": "concurrently \"npm run server\" \"npm run dev\"",
     "build": "tsc && vite build",
+    "start": "node backend/server.js",
     "preview": "vite preview"
   },
   "devDependencies": {
